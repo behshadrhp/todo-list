@@ -1,4 +1,4 @@
-use super::super::enums::TaskStatus;
+use crate::to_do::enums::TaskStatus;
 
 pub struct Base{
     pub title: String,
