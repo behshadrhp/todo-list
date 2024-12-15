@@ -3,8 +3,11 @@ mod to_do;
 use to_do::enums::TaskStatus;
 use to_do::ItemType;
 use to_do::to_do_factory;
-use to_do::structs::done::Done;
-use to_do::structs::pending::Pending;
+
+// import traits
+use crate::to_do::traits::read::Read;
+use crate::to_do::traits::update::Update;
+use crate::to_do::traits::delete::Delete;
 
 
 fn main() {
@@ -14,12 +17,12 @@ fn main() {
 
     match to_do_item {
         ItemType::Pending(item) => {
-            println!("{}", item.super_struct.status.stringify());
-            println!("{}", item.super_struct.title);
+            item.read(&item.super_struct.title);
+            item.set_to_done(&item.super_struct.title);
         },
         ItemType::Done(item) => {
-            println!("{}", item.super_struct.status.stringify());
-            println!("{}", item.super_struct.title);
+            item.read(&item.super_struct.title);
+            item.delete(&item.super_struct.title);
         }
     }
 }
